@@ -1,0 +1,21 @@
+{
+  "name": "mobilozophy/accessapiclient",
+  "description": "Mobilozophy - Access Development API Client",
+  "license": "Proprietary",
+  "authors": [
+    {
+      "name": "Jeffrey Wray",
+      "email": "jwray@mobilozophy.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.4",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mobilozophy\\accessapiclient\\": "src/"
+    }
+  },
+  "minimum-stability": "dev"
+}
