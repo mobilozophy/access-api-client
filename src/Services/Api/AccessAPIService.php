@@ -79,7 +79,7 @@ class AccessAPIService extends AbstractAPIService
             $requestUrl,
             $this->generateOptions($credentials,
                 [
-                    'query' => $query_parameters
+                    'query' => $queryParameters
                 ]
             )
         );
