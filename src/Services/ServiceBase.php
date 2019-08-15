@@ -72,6 +72,7 @@ class ServiceBase
     {
         $response = $this->apiService->get(
             $this->getSubAccountCredentials($otherHeaders),
+            $id,
             $memberKey,
             $query_parameters
         );
