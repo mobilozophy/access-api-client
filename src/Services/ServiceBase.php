@@ -68,9 +68,23 @@ class ServiceBase
      * @param null|array|string $include Related items to include in response.
      * @return bool|mixed
      */
-    public function get($id, $query_parameters=[], $memberKey = 'guest')
+    public function get($id, $query_parameters=[], $otherHeaders=[], $memberKey = 'guest')
     {
+        $response = $this->apiService->get(
+            $this->getSubAccountCredentials($otherHeaders),
+            $memberKey,
+            $query_parameters
+        );
 
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
+    }
+
+    /*
      * @param null|string $account_uuid The account id of the account to perform this call on.
      * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
      * @param array $otherHeaders Other headers to apply to call.
