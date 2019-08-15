@@ -71,11 +71,14 @@ class AccessAPIService extends AbstractAPIService
     public function get(Credentials $credentials, $id, $query_parameters, $memberKey)
     {
         $requestUrl = $this->getEndpointRequestUrl($id);
+        $queryParameters = array_merge($query_parameters, [
+            'member_key' => $memberKey
+        ]);
+
         return $this->httpClient->get(
             $requestUrl,
             $this->generateOptions($credentials,
                 [
-                    'json'   => ['member_key' => $memberKey],
                     'query' => $query_parameters
                 ]
             )
