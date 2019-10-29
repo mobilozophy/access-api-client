@@ -8,5 +8,6 @@ namespace Mobilozophy\accessapiclient\Services\Api;
 class StoresAPIService extends AccessAPIService
 {
     CONST ENDPOINT = '/stores';
+    CONST SCOPE = 'offer';
 }
 

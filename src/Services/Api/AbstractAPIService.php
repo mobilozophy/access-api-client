@@ -23,26 +23,40 @@ abstract class AbstractAPIService
      * Get endopoint API request URL with additional segments.
      *
      * @param mixed $segments
+     * @param string $url
      * @return string
      */
     protected function getEndpointRequestUrl($segments = null)
     {
-        return $this->getBaseRequestUrl(array_merge([static::ENDPOINT], (array) $segments));
+        return $this->getBaseRequestUrl(array_merge([static::ENDPOINT], (array) $segments), static::SCOPE);
     }
 
     /**
      * Get base API request URL with additional segments.
      *
      * @param mixed $segments
+     * @param string $api_scope
      * @return string URI
      */
-    protected function getBaseRequestUrl($segments = null)
+    protected function getBaseRequestUrl($segments = null, $api_scope = 'offer')
     {
         if (is_array($segments)) {
             $segments = implode('/', $segments);
         }
 
-        return $segments ? (env('ACCESS_BASEURL') . $segments) : env('ACCESS_BASEURL');
+        if($api_scope === 'offer') {
+            if ($segments) {
+                return (env('ACCESS_BASEURL') . $segments);
+            } else {
+                return env('ACCESS_BASEURL');
+            }
+        } elseif ($api_scope === 'redeem') {
+            if ($segments) {
+                return (env('ACCESS_REDEMPTION_BASEURL') . $segments);
+            } else {
+                return env('ACCESS_REDEMPTION_BASEURL');
+            }
+        }
     }
 
     /**
