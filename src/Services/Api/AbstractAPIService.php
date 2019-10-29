@@ -38,7 +38,7 @@ abstract class AbstractAPIService
      * @param string $api_scope
      * @return string URI
      */
-    protected function getBaseRequestUrl($segments = null, $api_scope = 'offer')
+    protected function getBaseRequestUrl($segments, $api_scope)
     {
         if (is_array($segments)) {
             $segments = implode('/', $segments);

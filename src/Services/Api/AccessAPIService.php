@@ -4,7 +4,7 @@ namespace Mobilozophy\accessapiclient\Services\Api;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
-use function GuzzleHttp\Psr7\str;
+use GuzzleHttp\Psr7\str;
 use InvalidArgumentException;
 
 /**
@@ -131,17 +131,28 @@ class AccessAPIService extends AbstractAPIService
      *
      * @param mixed $segments Segments of the URL
      *
+     * @param string $api_scope
      * @return string
      */
-    protected function getBaseRequestUrl($segments = null)
+    protected function getBaseRequestUrl($segments, $api_scope)
     {
         if (is_array($segments)) {
             $segments = implode('/', $segments);
         }
 
-        $baseUrl =env('ACCESS_BASEURL');
-
-        return $baseUrl . '/' . $segments;
+        if($api_scope === 'offer') {
+            if ($segments) {
+                return (env('ACCESS_BASEURL') . $segments);
+            } else {
+                return env('ACCESS_BASEURL');
+            }
+        } elseif ($api_scope === 'redeem') {
+            if ($segments) {
+                return (env('ACCESS_REDEMPTION_BASEURL') . $segments);
+            } else {
+                return env('ACCESS_REDEMPTION_BASEURL');
+            }
+        }
     }
 
     protected function generateOptions(Credentials $credentials, $options = null)
