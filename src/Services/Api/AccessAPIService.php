@@ -36,6 +36,21 @@ class AccessAPIService extends AbstractAPIService
             );
     }
 
+    public function addWithJsonPayload(Credentials $credentials, array $params)
+    {
+        $requestUrl = $this->getEndpointRequestUrl();
+
+            return $this->httpClient->post(
+                $requestUrl,
+                $this->generateOptions($credentials,
+                    [
+                        'json' => $params,
+                        'debug' => false
+                    ]
+                )
+            );
+    }
+
     /**
      * Send a request to update a resource
      *
@@ -151,6 +166,12 @@ class AccessAPIService extends AbstractAPIService
                 return (env('ACCESS_REDEMPTION_BASEURL') . $segments);
             } else {
                 return env('ACCESS_REDEMPTION_BASEURL');
+            }
+        } elseif ($api_scope === 'amt') {
+            if ($segments) {
+                return (env('ACCESS_AMT_BASEURL') . $segments);
+            } else {
+                return env('ACCESS_AMT_BASEURL');
             }
         }
     }

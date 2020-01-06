@@ -56,6 +56,12 @@ abstract class AbstractAPIService
             } else {
                 return env('ACCESS_REDEMPTION_BASEURL');
             }
+        } elseif ($api_scope === 'amt') {
+            if ($segments) {
+                return (env('ACCESS_AMT_BASEURL') . $segments);
+            } else {
+                return env('ACCESS_AMT_BASEURL');
+            }
         }
     }
 

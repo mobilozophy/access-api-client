@@ -178,6 +178,30 @@ class ServiceBase
     }
 
     /**
+     * Get Account Credentials for API Calls
+     * @param null|string $account The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
+     * @return Credentials
+     */
+    public function getSubAccountCredentialsAMT($otherHeaders = array())
+    {
+
+        $headers =             [
+            'Accept'    => 'application/json',
+            'Content-Type' => 'application/json'
+        ];
+
+        $headers = array_merge($headers, $otherHeaders);
+
+        return new Credentials(
+            env('ACCESS_TOKEN_AMT'),
+            $headers
+
+        );
+    }
+
+    /**
      * @param $exception
      * @return string
      */
