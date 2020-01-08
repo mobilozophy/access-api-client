@@ -157,21 +157,21 @@ class AccessAPIService extends AbstractAPIService
 
         if($api_scope === 'offer') {
             if ($segments) {
-                return (env('ACCESS_BASEURL') . $segments);
+                return (config('access.ACCESS_BASEURL') . $segments);
             } else {
-                return env('ACCESS_BASEURL');
+                return config('access.ACCESS_BASEURL');
             }
         } elseif ($api_scope === 'redeem') {
             if ($segments) {
-                return (env('ACCESS_REDEMPTION_BASEURL') . $segments);
+                return (config('access.ACCESS_REDEMPTION_BASEURL') . $segments);
             } else {
-                return env('ACCESS_REDEMPTION_BASEURL');
+                return config('access.ACCESS_REDEMPTION_BASEURL');
             }
         } elseif ($api_scope === 'amt') {
             if ($segments) {
-                return (env('ACCESS_AMT_BASEURL') . $segments);
+                return (config('access.ACCESS_AMT_BASEURL') . $segments);
             } else {
-                return env('ACCESS_AMT_BASEURL');
+                return config('access.ACCESS_AMT_BASEURL');
             }
         }
     }
@@ -188,12 +188,12 @@ class AccessAPIService extends AbstractAPIService
         }
 
         //Check if we need to proxy the request; really only to be used in a development environement
-        if (env('PROXY_REQUESTS_IP_PORT', false)) {
-            if ( is_bool(env('PROXY_REQUESTS_IP_PORT', false)) ){
+        if (config('access.PROXY_REQUESTS_IP_PORT', false)) {
+            if ( is_bool(config('access.PROXY_REQUESTS_IP_PORT', false)) ){
                 $address = gethostbyname(trim(exec("hostname"))).':8888';
             }else
             {
-                $address = env('PROXY_REQUESTS_IP_PORT');
+                $address = config('access.PROXY_REQUESTS_IP_PORT');
             }
             $proxy = [
                 'proxy' => 'http://' . $address,

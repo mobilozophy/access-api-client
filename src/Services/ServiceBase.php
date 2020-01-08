@@ -171,7 +171,7 @@ class ServiceBase
         $headers = array_merge($headers, $otherHeaders);
 
         return new Credentials(
-            env('ACCESS_TOKEN'),
+            config('access.ACCESS_TOKEN'),
             $headers
 
         );
@@ -195,7 +195,7 @@ class ServiceBase
         $headers = array_merge($headers, $otherHeaders);
 
         return new Credentials(
-            env('ACCESS_TOKEN_AMT'),
+            config('access.ACCESS_TOKEN_AMT'),
             $headers
 
         );
